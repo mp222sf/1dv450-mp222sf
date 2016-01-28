@@ -1,0 +1,32 @@
+<h1>Skapa ny API-nyckel</h1>
+
+<%= render "layouts/menuLoggedIn" %>
+
+<% if @apiKey.errors.any? %>
+    <div id="error_messages">
+        <h2><%= @apiKey.errors.count %> fel i formuläret gjorde att API-nyckeln inte kunde registreras:</h2>
+    
+        <ul>
+            <% @apiKey.errors.messages.values.each do |msg| %>
+                <%msg.each do |m| %>
+                    <li><%= m %></li>
+                <%end %>
+            <% end %>
+        </ul>
+    </div>
+<% end %>
+
+<%= form_for @apiKey, url: {action: "create"}, html: {class: "ApiKey"} do |k| %>
+    <div class="text_field">
+        <%= k.label(:appName, 'Applikationsnamn:') %><br />
+        <%= k.text_field :appName %>
+    </div>
+    <div class="text_field">
+        <%= k.label(:appURL, 'Applikations-URL:') %><br />
+        <%= k.text_field :appURL %>
+    </div>
+    <div class="submit">
+        <%= k.submit "Skapa nyckel" %>
+    </div>
+<% end %>
+    

@@ -1,0 +1,18 @@
+// Place all the styles related to the authentications controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.field_with_errors {
+    display: inline;
+    margin: 0px;
+}
+
+.field_with_errors input {
+    border: 1px solid red;
+    box-shadow: 1px 1px 1px red;
+}
+
+.field_with_errors text_field {
+    border: 1px solid red;
+    box-shadow: 1px 1px 1px red;
+}

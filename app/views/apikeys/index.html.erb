@@ -1,0 +1,12 @@
+<h1>API-nyckel</h1>
+
+<%= render "layouts/menuLoggedIn" %>
+<p>Dina nycklar:</p>
+<ul>
+    <% @keys.each do |p| %>
+        <li><%= p.key %> | <%= p.appName %> | <%= p.appURL %> | <%= link_to 'Ta bort', apikey_path(p.id), :method => :delete, data: { confirm: 'Vill du ta bort nyckeln?' } %></li>
+    <% end %>  
+</ul>
+
+<%= link_to "Lägg till ny nyckel", new_apikey_path %>
+

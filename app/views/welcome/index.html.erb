@@ -1,0 +1,23 @@
+<h1>Start</h1>
+
+<%= render "layouts/menu" %>
+
+<% if flash[:notice] %>
+    <div class="notice">
+        <%= flash[:notice] %>
+    </div>
+<% end %>
+
+<fieldset>
+    <%= form_tag(login_path, method: "post") do %>
+    
+        <p><%= label_tag(:username, "Användarnamn:") %></p>
+        <p><%= text_field_tag(:username) %></p>
+        
+        <p><%= label_tag(:password, "Lösenord:") %></p>
+        <p><%= password_field_tag(:password) %></p>
+        
+        <p><%= submit_tag("Log in") %></p>
+        
+    <% end %>
+</fieldset>

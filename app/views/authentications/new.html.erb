@@ -1,0 +1,41 @@
+<h1>Registrera</h1>
+
+<%= render "layouts/menu" %>
+
+
+<% if @auth.errors.any? %>
+    <div id="error_messages">
+        <h2><%= @auth.errors.count %> fel i formuläret gjorde att användaren inte kunde registreras:</h2>
+    
+        <ul>
+            <% @auth.errors.messages.values.each do |msg| %>
+                <%msg.each do |m| %>
+                    <li><%= m %></li>
+                <%end %>
+            <% end %>
+        </ul>
+    </div>
+<% end %>
+
+<%= form_for @auth do |f| %>
+    <div class="text_field">
+        <%= f.label(:username, 'Användarnamn:') %><br />
+        <%= f.text_field :username %>
+    </div>
+    <div class="text_field">
+        <%= f.label(:email, 'E-postadress:') %><br />
+        <%= f.text_field :email %>
+    </div>
+    <div class="text_field">
+        <%= f.label(:password, 'Lösenord:') %><br />
+        <%= f.password_field :password %>
+    </div>
+    <div class="text_field">
+        <%= f.label(:password_confirmation, 'Upprepa lösenord:') %><br />
+        <%= f.password_field :password_confirmation %>
+    </div>
+    <div class="submit">
+        <%= f.submit "Skapa användare" %>
+    </div>
+<% end %>
+    

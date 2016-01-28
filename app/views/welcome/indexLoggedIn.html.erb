@@ -1,0 +1,10 @@
+<h1>Start</h1>
+<h2>Inloggad som Användare</h2>
+
+<%= render "layouts/menuLoggedIn" %>
+
+<p>Användarnamn: <%= @auth.username %></p>
+<p>E-postadress: <%= @auth.email %></p>
+
+<%= link_to "Logga ut", logout_path %>
+
