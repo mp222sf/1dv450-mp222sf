@@ -1,1 +1,26 @@
-<%= link_to "Start", controller: "welcome", action: "index" %> - <%= link_to "Registrera", controller: "authentications", action: "new" %>
+<div id="menu">
+    <div class="menuTab">
+        <%= link_to "START", controller: "welcome", action: "index" %>
+    </div>
+    <div class="menuTab">
+        <%= link_to "REGISTRERA", controller: "authentications", action: "new" %>
+    </div>
+    <div id="menuLogin">
+        <% if flash[:notice] %>
+            <div class="menuTabError">
+                <p><%= flash[:notice] %></p>
+            </div>
+        <% end %>
+        <%= form_tag(login_path, method: "post") do %>
+        <div class="menuTabLogin<% if flash[:notice] %> error<% end %>">
+            <%= text_field_tag :username, nil, placeholder: 'Användarnamn' %>
+        </div>
+        <div class="menuTabLogin<% if flash[:notice] %> error<% end %>">
+            <%= password_field_tag :password, nil, placeholder: 'Lösenord' %>
+        </div>
+        <div class="menuTabLogin">
+            <%= submit_tag("Logga in") %>
+        </div>
+        <% end %>
+    </div>
+</div>

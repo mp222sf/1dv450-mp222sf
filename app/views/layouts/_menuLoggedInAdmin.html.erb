@@ -1,1 +1,20 @@
-<%= link_to "Start", controller: "welcome", action: "index" %>
+<div id="menu">
+    <div class="menuTab">
+        <%= link_to "START", controller: "welcome", action: "index" %>
+    </div>
+    <div class="menuTab">
+        <%= link_to "API-NYCKLAR", controller: "apikeys", action: "index" %>
+    </div>
+    <div class="menuTab">
+        <%= link_to "ANVÄNDARE", controller: "authentications", action: "showAll" %>
+    </div>
+    <div id="menuLogin">
+        <div class="menuTab">
+            <% user = currentAuth.username %>
+            <%= link_to user, controller: "welcome", action: "account" %>
+        </div>
+        <div class="menuTab">
+            <%= link_to "LOGGA UT", logout_path %>
+        </div>
+    </div>
+</div>

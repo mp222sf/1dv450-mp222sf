@@ -1,8 +1,14 @@
 class WelcomeController < ApplicationController
-    
     # Startsida.
     def index
-        isLoggedIn
+        if loggedIn?
+            @auth = currentAuth
+            if @auth.rights == 1
+                render 'indexLoggedInAdmin'
+            else
+                render 'indexLoggedIn'
+            end
+        end
     end
     
     # Registreringsformulär.
@@ -22,21 +28,20 @@ class WelcomeController < ApplicationController
         end
     end
     
+    def account
+        if loggedIn?
+            @auth = currentAuth
+            if @auth.rights == 1
+                render 'accountAdmin'
+            end
+        else
+            redirect_to root_path
+        end
+    end
+    
     # Utloggning. Tar bort session.
     def logout
         session[:authID] = nil;
         redirect_to root_path :notice => "Utloggad"
-    end
-    
-    # Om inloggad - omdirigeras till apikeysida.
-    def isLoggedIn
-        if session[:authID]
-            @auth = Authentication.find(session[:authID])
-            if @auth.rights == 1
-                render 'indexLoggedInAdmin'
-            else
-                render 'indexLoggedIn'
-            end
-        end
     end
 end

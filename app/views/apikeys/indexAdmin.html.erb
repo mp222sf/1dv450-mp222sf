@@ -1,9 +1,10 @@
-<%= render "layouts/menuLoggedIn" %>
+<%= render "layouts/menuLoggedInAdmin" %>
 <h1>API-nycklar</h1>
 
 <div id="container">
     <div id="apiKeys">
         <div class="apiKeyRow header">
+            <div class="apiKeyUser">Användare</div>
             <div class="apiKeyAppName">Applikationsnamn</div>
             <div class="apiKeyAppURL">URL</div>
             <div class="apiKeyValue">Nyckel</div>
@@ -12,6 +13,7 @@
         
         <% @keys.each do |p| %>
             <div class="apiKeyRow<% if row == false %> rowEqual<% end %>">
+                <div class="apiKeyUser"><%= @auth.find(p.authentication_id).username %></div>
                 <div class="apiKeyAppName"><%= p.appName %></div>
                 <div class="apiKeyAppURL"><%= p.appURL %></div>
                 <div class="apiKeyValue"><%= p.key %></div>
@@ -20,7 +22,4 @@
             <% row = !row %>
         <% end %> 
     </div>
-    
-    <%= link_to "Lägg till ny nyckel", new_apikey_path %>
 </div>
-

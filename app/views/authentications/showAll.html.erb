@@ -1,0 +1,19 @@
+<%= render "layouts/menuLoggedInAdmin" %>
+<h1>Användare</h1>
+
+<div id="container">
+    <div id="apiKeys">
+        <div class="apiKeyRow header">
+            <div class="apiKeyAppName">Applikationsnamn</div>
+        </div>
+        <% row = true %>
+        
+        <% @auth.each do |p| %>
+            <div class="apiKeyRow<% if row == false %> rowEqual<% end %>">
+                <div class="apiKeyAppName"><%= p.username %></div>
+                <div class="apiKeyDelete"><%= link_to 'Ta bort', authentication_path(p.id), :method => :delete, data: { confirm: 'Vill du ta bort användaren?' } %></div>
+            </div>
+            <% row = !row %>
+        <% end %> 
+    </div>
+</div>

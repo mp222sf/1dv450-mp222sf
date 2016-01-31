@@ -1,6 +1,15 @@
 class AuthenticationsController < ApplicationController
+    before_action :alreadyLoggedIn, :except => [:showAll, :destroy]
+    before_action :requireLogin, :except => [:new, :create]
+    
+    def showAll
+        if Authentication.find(session[:authID]).rights == 2
+            redirect_to root_path
+        end
+        @auth = Authentication.all
+    end
+    
     def new
-        isLoggedIn
         @auth = Authentication.new
     end
     
@@ -11,23 +20,27 @@ class AuthenticationsController < ApplicationController
         
         if @auth.save
             session[:authID] = @auth.id
-            redirect_to apikeyShow_path
+            redirect_to root_path
         else
             render :action => "new"
         end
+    end
+    
+    def destroy
+        auth = Authentication.find(session[:authID])
+        userToDelete = Authentication.find(params[:id])
+        
+        if auth != nil
+            if auth.rights == 1
+                userToDelete.destroy
+            end
+        end
+        redirect_to showAll_path
     end
     
     # Binder parametrar till Authentication-objekt.
     private
     def authentication_params
        params.require(:authentication).permit(:username, :email, :password, :password_confirmation) 
-    end
-    
-    # Om användaren inte är inloggad omdirigeras hen till inloggningssidan.
-    private
-    def isLoggedIn
-        if session[:authID]
-            redirect_to root_path
-        end
     end
 end

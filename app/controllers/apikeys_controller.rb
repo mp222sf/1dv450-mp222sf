@@ -1,21 +1,21 @@
 class ApikeysController < ApplicationController
+    before_action :requireLogin
     
     def index
-        isLoggedIn
-
+        if Authentication.find(session[:authID]).rights == 1
+            @keys = ApiKey.all
+            @auth = Authentication.all
+            render "indexAdmin"
+        end
         @keys = ApiKey.where(authentication_id: session[:authID])
     end
     
     def new
-        isLoggedIn
-        
         @apiKey = ApiKey.new
     end
     
     # Skapar en ny användare.
     def create
-        isLoggedIn
-        
         @apiKey = ApiKey.create(apikey_params)
         @apiKey.authentication_id = session[:authID]
         getUniqueKey
@@ -27,10 +27,23 @@ class ApikeysController < ApplicationController
         end
     end
     
+    def show
+        redirect_to apikeys_path
+    end
+    
     def destroy
-        isLoggedIn
+        auth = Authentication.find(session[:authID])
+        key = ApiKey.find(params[:id])
         
-        ApiKey.find(params[:id]).destroy
+        if auth != nil
+            if auth.rights == 1
+                key.destroy
+            else
+                if key.authentication_id == auth.id
+                    key.destroy
+                end
+            end
+        end
         redirect_to apikeys_path
     end
     
@@ -53,16 +66,7 @@ class ApikeysController < ApplicationController
     end
     
     # Binder parametrar till ApiKey-objekt.
-    private
     def apikey_params
        params.require(:api_key).permit(:appName, :appURL) 
-    end
-    
-    # Om användaren inte är inloggad omdirigeras hen till inloggningssidan.
-    private
-    def isLoggedIn
-        if !session[:authID]
-            redirect_to root_path
-        end
     end
 end

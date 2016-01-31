@@ -1,3 +1,45 @@
 // Place all the styles related to the apikeys controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.apiKeyRow {
+    display: block;
+    background-color: #a1a1a1;
+    color: black;
+    padding: 3px;
+}
+
+.apiKeyValue {
+    display: inline-block;
+    width: 300px;
+}
+
+.apiKeyAppName {
+    display: inline-block;
+    width: 300px;
+}
+
+.apiKeyAppURL {
+    display: inline-block;
+    width: 300px;
+}
+
+.apiKeyDelete {
+    display: inline-block;
+    width: 100px;
+}
+
+.apiKeyUser {
+    display: inline-block;
+    width: 200px;
+}
+
+.header {
+    font-weight: bold;
+    background-color: black;
+    color: white;
+}
+
+.rowEqual {
+    background-color: #d0d0d0;
+}

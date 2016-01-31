@@ -13,3 +13,95 @@
  *= require_tree .
  *= require_self
  */
+
+body {
+    background-color: #f7f7f7;
+    font-family: "Book Antiqua";
+    margin: 0px;
+}
+
+h1 {
+    padding-left: 25px;
+}
+
+
+
+
+#menu {
+    background-color: black;
+    height: 50px;
+    padding: 0px;
+    padding-left: 25px;
+}
+
+.menuTab {
+    display:inline-block;
+    height: 100%;
+    line-height: 50px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.menuTab a {
+    font-size: 20px;
+    color: white;
+    text-decoration: none;
+}
+
+.menuTab:hover {
+    background-color: #b5b5b5;
+}
+
+.menuTabLogin {
+    display:inline-block;
+    height: 100%;
+    line-height: 50px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#menuLogin {
+    display: inline-block;
+    position: absolute;
+    right: 25px;
+}
+
+#menu input {
+    padding: 3px;
+}
+
+#menu form {
+    display: inline-block;
+}
+
+.error input {
+    border-color: #ff3535;
+    background-color: #ffeded;
+}
+
+.menuTabError {
+    margin: 0px;
+    display: inline-block;
+    color: #ff3535;
+}
+
+
+
+
+
+#container {
+    margin: 25px;
+}
+
+#login {
+    border: 2px solid #676767;
+    width: 400px;
+    display: inline-block;
+    border-radius: 15px;
+    margin:20px;
+}
+
+#login input {
+    border-radius: 15px;
+    padding: 5px;
+}

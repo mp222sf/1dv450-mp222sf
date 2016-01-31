@@ -2,6 +2,22 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+#register {
+    width: 300px;
+}
+
+#register input {
+    padding: 3px;
+}
+
+.text_field {
+    margin-bottom: 8px;
+}
+
+.text_field label {
+    font-weight: bold;
+}
+
 .field_with_errors {
     display: inline;
     margin: 0px;
