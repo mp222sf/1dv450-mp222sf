@@ -7,4 +7,4 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 Authentication.destroy_all
-a1 = Authentication.create(username: "mp222sf", email: "mp222sf@student.lnu.se", password: "hejhej123", password_confirmation: "hejhej123", rights: 1)
+a1 = Authentication.create(username: "admin", email: "admin@admin.com", password: "password", password_confirmation: "password", rights: 1)

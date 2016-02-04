@@ -11,7 +11,7 @@
         <% @auth.each do |p| %>
             <div class="apiKeyRow<% if row == false %> rowEqual<% end %>">
                 <div class="apiKeyAppName"><%= p.username %></div>
-                <div class="apiKeyDelete"><%= link_to 'Ta bort', authentication_path(p.id), :method => :delete, data: { confirm: 'Vill du ta bort användaren?' } %></div>
+                <div class="apiKeyDelete"><% if p.id != 1 %><%= link_to 'Ta bort', authentication_path(p.id), :method => :delete, data: { confirm: 'Vill du ta bort användaren?' } %><% end %></div>
             </div>
             <% row = !row %>
         <% end %> 

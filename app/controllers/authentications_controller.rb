@@ -29,9 +29,11 @@ class AuthenticationsController < ApplicationController
     def destroy
         auth = Authentication.find(session[:authID])
         userToDelete = Authentication.find(params[:id])
+        userApiKeysToDelete = ApiKey.where(authentication_id: userToDelete.id)
         
         if auth != nil
             if auth.rights == 1
+                userApiKeysToDelete.destroy_all
                 userToDelete.destroy
             end
         end
