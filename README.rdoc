@@ -12,6 +12,6 @@
 9. En ruta kommer upp med länken till applikationen.
 
 === Inloggning till Admin
-_Användarnamn:_ admin
+Användarnamn: admin
 
-_Lösenord_ password
+Lösenord: password
