@@ -1,7 +1,7 @@
 = Installation
 
 === Steg-för-steg
-1. Klona ner repot från GitHub.
+1. Klona ner repot från GitHub, ev ladda ner release v1.0.
 2. Skapa ett nytt workspace på Cloud9 (www.c9.io). Välj template Custom.
 3. I ditt workspace så drar du in repo-mappen du fått från GitHub.
 4. Öppna sedan en ny terminal i Cloud9, genom Window->New Terminal.
