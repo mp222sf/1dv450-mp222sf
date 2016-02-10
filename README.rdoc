@@ -7,7 +7,7 @@
 4. Öppna sedan en ny terminal i Cloud9, genom Window->New Terminal.
 5. I terminalen navigerar du till mappen som du lagt in i Cloud9, ex genom att skriva: cd 1dv450-mp222sf
 6. I terminalen skriver du sedan: bundle install
-7. Du väntar tills alla installationer är klara innan du i terminalen skriver: rake db:seed
+7. Du väntar tills alla installationer är klara innan du i terminalen skriver: rake db:migrate, följt av: rake db:seed
 8. I terminalen skriver du sedan det här för att starta applikationen: rails s -p $PORT -b $IP
 9. En ruta kommer upp med länken till applikationen.
 
