@@ -52,7 +52,7 @@ class ApikeysController < ApplicationController
     def getUniqueKey
         loop do
             isUnique = true
-            @apiKey.key = Array.new(32){rand(36).to_s(36)}.join
+            @apiKey.key = SecureRandom.hex(20)
             allKeys = ApiKey.all
             
             allKeys.each do |k|

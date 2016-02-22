@@ -3,11 +3,7 @@ class WelcomeController < ApplicationController
     def index
         if loggedIn?
             @auth = currentAuth
-            if @auth.rights == 1
-                render 'indexLoggedInAdmin'
-            else
-                render 'indexLoggedIn'
-            end
+            render 'indexLoggedIn'
         end
     end
     
@@ -31,9 +27,6 @@ class WelcomeController < ApplicationController
     def account
         if loggedIn?
             @auth = currentAuth
-            if @auth.rights == 1
-                render 'accountAdmin'
-            end
         else
             redirect_to root_path
         end

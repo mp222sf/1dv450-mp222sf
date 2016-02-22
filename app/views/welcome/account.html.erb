@@ -1,10 +1,20 @@
-<%= render "layouts/menuLoggedIn" %>
+<% if @auth.rights == 1 %>
+    <%= render "layouts/menuLoggedInAdmin" %>
+<% else %>
+    <%= render "layouts/menuLoggedIn" %>
+<% end %>
+
 <h1>Konto</h1>
 
 <div id="container">
     <p>Användarnamn: <%= @auth.username %></p>
     <p>E-postadress: <%= @auth.email %></p>
-    <p>Rättighetstyp: Användare</p>
+    
+    <% if @auth.rights == 1 %>
+        <p>Rättighetstyp: Admin</p>
+    <% else %>
+        <p>Rättighetstyp: Användare</p>
+    <% end %>
 </div>
 
 

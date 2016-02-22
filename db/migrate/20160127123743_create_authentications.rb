@@ -5,7 +5,9 @@ class CreateAuthentications < ActiveRecord::Migration
       t.string :username, :null => false
       t.string :email, :null => false
       t.string :password_digest, :null => false
-      t.integer :rights
+      t.integer :rights,
+                :null => false,
+                :default => 2
       t.timestamps null: false
     end
   end

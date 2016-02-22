@@ -3,23 +3,30 @@
 
 <div id="container">
     <div id="apiKeys">
-        <div class="apiKeyRow header">
-            <div class="apiKeyUser">Användare</div>
-            <div class="apiKeyAppName">Applikationsnamn</div>
-            <div class="apiKeyAppURL">URL</div>
-            <div class="apiKeyValue">Nyckel</div>
-        </div>
         <% row = true %>
         
-        <% @keys.each do |p| %>
-            <div class="apiKeyRow<% if row == false %> rowEqual<% end %>">
-                <div class="apiKeyUser"><%= @auth.find(p.authentication_id).username %></div>
-                <div class="apiKeyAppName"><%= p.appName %></div>
-                <div class="apiKeyAppURL"><%= p.appURL %></div>
-                <div class="apiKeyValue"><%= p.key %></div>
-                <div class="apiKeyDelete"><%= link_to 'Ta bort', apikey_path(p.id), :method => :delete, data: { confirm: 'Vill du ta bort nyckeln?' } %></div>
-            </div>
-            <% row = !row %>
+        <% @auth.each do |p| %>
+            <% if @keys.where(authentication_id: p.id).length > 0 %>
+                <div>
+                    <div class="apiKeyUser"><h3><%= p.username %></h3></div>
+                    <div class="apiKeyRow header">
+                        <div class="apiKeyAppName">Applikationsnamn</div>
+                        <div class="apiKeyAppURL">URL</div>
+                        <div class="apiKeyValue">Nyckel</div>
+                    </div>
+                    <% @keys.each do |key| %>
+                        <% if key.authentication_id == p.id %>
+                            <div class="apiKeyRow<% if row == false %> rowEqual<% end %>">
+                                <div class="apiKeyAppName"><%= key.appName %></div>
+                                <div class="apiKeyAppURL"><%= key.appURL %></div>
+                                <div class="apiKeyValue"><%= key.key %></div>
+                                <div class="apiKeyDelete"><%= link_to 'Ta bort', apikey_path(key.id), :method => :delete, data: { confirm: 'Vill du ta bort nyckeln?' } %></div>
+                            </div>
+                            <% row = !row %>
+                        <% end %>
+                    <% end %>
+                </div>
+            <% end %>    
         <% end %> 
     </div>
 </div>

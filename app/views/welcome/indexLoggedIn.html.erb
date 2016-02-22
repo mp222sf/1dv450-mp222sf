@@ -1,4 +1,9 @@
-<%= render "layouts/menuLoggedIn" %>
+<% if @auth.rights == 1 %>
+    <%= render "layouts/menuLoggedInAdmin" %>
+<% else %>
+    <%= render "layouts/menuLoggedIn" %>
+<% end %>
+
 <h1>Start</h1>
 
 <div id="container">

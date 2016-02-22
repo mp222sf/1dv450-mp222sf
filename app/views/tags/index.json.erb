@@ -1,0 +1,21 @@
+{
+    "statusCode" : "200",
+    "statusNote" : "Your request succeeded",
+    "pizzeria_link" : "/pizzerias/<%= @pizzeria.id.to_json.html_safe %>",
+    "tags"  : [
+    <% @counter = 0 %> 
+        <% @pizzeriaTags.each_with_index do |pt,index| %>
+            <% @tags.each_with_index do |t,index_tags| %>
+                <% if pt.tag_id == t.id %>
+                    <% if @counter > 0 %>
+                        ,
+                    <% end %>
+                    {
+                        "name" : <%= t.name.to_json.html_safe %>
+                    }
+                    <% @counter += 1 %>
+                <% end %>
+            <% end %>
+        <% end %>            
+]
+}

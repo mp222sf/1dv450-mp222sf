@@ -1,0 +1,18 @@
+{
+    "statusCode" : "200",
+    "statusNote" : "Your request succeeded",
+    "pizzeria" : {
+                    "id" : <%= @pizzeria.id.to_json.html_safe %>,
+                    "name" : <%= @pizzeria.name.to_json.html_safe %>,
+                    "position" : {
+                                    "longitude" : <%= @position.longitude.to_json.html_safe %>,
+                                    "latitude" : <%= @position.latitude.to_json.html_safe %>,
+                                    "link" : "/positions/<%= @position.id.to_json.html_safe %>"
+                                 },
+                    "creator" : {
+                                    "firstName" : <%= @creator.firstName.to_json.html_safe %>,
+                                    "lastName" : <%= @creator.lastName.to_json.html_safe %>,
+                                    "link" : "/creators/<%= @creator.id.to_json.html_safe %>"
+                                 }
+                 }
+}

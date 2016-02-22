@@ -1,17 +1,28 @@
-= Installation
+== README
 
-=== Steg-för-steg
-1. Klona ner repot från GitHub, ev ladda ner release v1.0.
-2. Skapa ett nytt workspace på Cloud9 (www.c9.io). Välj template Custom.
-3. I ditt workspace så drar du in repo-mappen du fått från GitHub.
-4. Öppna sedan en ny terminal i Cloud9, genom Window->New Terminal.
-5. I terminalen navigerar du till mappen som du lagt in i Cloud9, ex genom att skriva: cd 1dv450-mp222sf
-6. I terminalen skriver du sedan: bundle install
-7. Du väntar tills alla installationer är klara innan du i terminalen skriver: rake db:migrate, följt av: rake db:seed
-8. I terminalen skriver du sedan det här för att starta applikationen: rails s -p $PORT -b $IP
-9. En ruta kommer upp med länken till applikationen.
+This README would normally document whatever steps are necessary to get the
+application up and running.
 
-=== Inloggning till Admin
-Användarnamn: admin
+Things you may want to cover:
 
-Lösenord: password
+* Ruby version
+
+* System dependencies
+
+* Configuration
+
+* Database creation
+
+* Database initialization
+
+* How to run the test suite
+
+* Services (job queues, cache servers, search engines, etc.)
+
+* Deployment instructions
+
+* ...
+
+
+Please feel free to use a different markup language if you do not plan to run
+<tt>rake doc:app</tt>.

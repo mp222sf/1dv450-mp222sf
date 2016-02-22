@@ -1,0 +1,15 @@
+{
+    "statusCode" : "200",
+    "statusNote" : "Your request succeeded",
+    "pizzerias"  : [
+        <% @pizzerias.each_with_index do |p,index| %>
+            {
+                "name" : <%= p.name.to_json.html_safe %>,
+                "link" : "/pizzerias/<%= p.id.to_json.html_safe %>"
+            }
+            <% unless index == @pizzerias.count - 1 %>
+                ,
+            <% end %>
+        <% end %>
+    ]
+}

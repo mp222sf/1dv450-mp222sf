@@ -16,7 +16,7 @@ class AuthenticationsController < ApplicationController
     # Skapar en ny användare.
     def create
         @auth = Authentication.create(authentication_params)
-        @auth.rights = 2
+        # @auth.rights = 2
         
         if @auth.save
             session[:authID] = @auth.id

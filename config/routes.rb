@@ -6,11 +6,28 @@ Rails.application.routes.draw do
   root 'welcome#index'
   resources :authentications
   resources :apikeys
+  resources :menu, only: [:index, :show]
+  resources :pizzerias, only: [:index, :show] do
+    resources :menus, only: [:index]
+    resources :tags, only: [:index]
+  end
+  resources :menus, only: [:index]
+  resources :positions, only: [:index, :show]
+  
+  
   
   post 'login' => 'welcome#login', as: :login
   get 'logout' => 'welcome#logout', as: :logout
   get 'account' => 'welcome#account', as: :account
   get 'showAll' => 'authentications#showAll', as: :showAll
+  
+  constraints(latitude: /\d+\.\d+/, longitude: /\d+\.\d+/) do
+    get 'pizzerias/:latitude/:longitude' => 'pizzerias#coordinates', as: :coordinates
+  end
+  
+  
+  
+  #match "/positions/:latitude/:longitude(/:range)", :to => "positions#coordinates", :as => "coordinates", :constraints => {:range => /\d+/}
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
