@@ -21,7 +21,7 @@ Lösenord: password
 
 *Postman:* https://www.getpostman.com/collections/35c6e936c60f1f60cb4d
 
-http://pavic10.byethost17.com/relations.png
+*Relationer:* {pavic10.byethost17.com/relations.png}
 
 == Hämta (GET)
 
