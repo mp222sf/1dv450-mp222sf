@@ -24,35 +24,35 @@ Ex. https://webbramverk-1dv450-mp222sf.c9users.io/pizzerias?key=83f8f2cebf797ef2
 
 == Hämta (GET)
 === Alla
-*Pizzerior:* /pizzerias?key={din-api-nyckel}
+* *Pizzerior:* /pizzerias?key={din-api-nyckel}
 
-*Positioner:* /positions?key={din-api-nyckel}
+* *Positioner:* /positions?key={din-api-nyckel}
 
-*Menyer:* /menus?key={din-api-nyckel}
+* *Menyer:* /menus?key={din-api-nyckel}
 
-*Övriga parametrar:* Limit = max antal objekt. Offset = startobjekt.
+* *Andra* *parametrar:* Limit = max antal objekt. Offset = startobjekt.
 
 *Exempel:* /pizzerias?key=283bcb40ca046250f719cd414e35asdfbc9e0101&offset=5&limit=3
 
 == En specifik
-*Pizzeria:* /pizzerias/{id}?key={din-api-nyckel}
+* *Pizzeria:* /pizzerias/{id}?key={din-api-nyckel}
 
-*Position:* /positions/{id}?key={din-api-nyckel}
+* *Position:* /positions/{id}?key={din-api-nyckel}
 
-*Meny:* /menus/{id}?key={din-api-nyckel}
+* *Meny:* /menus/{id}?key={din-api-nyckel}
 
-*Creator:* /creator/{id}?key={din-api-nyckel}
+* *Creator:* /creator/{id}?key={din-api-nyckel}
 
 *Exempel:* /pizzerias/13?key=283bcb40ca040f719asdcd414e328d5fbc9e0101
 
 == Övriga
-*En pizzerias menyer:* /pizzerias/{pizzeria_id}/menus?key={din-api-nyckel}
+* *En* *pizzerias* *menyer:* /pizzerias/{pizzeria_id}/menus?key={din-api-nyckel}
 
-*En pizzerias taggar:* /pizzerias/{pizzeria_id}/tags?key={din-api-nyckel}
+* *En* *pizzerias* *taggar:* /pizzerias/{pizzeria_id}/tags?key={din-api-nyckel}
 
-*Pizzerior nära koordinater:* /pizzerias/{latitude}/{longitude}?key={din-api-nyckel}
+* *Pizzerior* *runtom* *koordinater:* /pizzerias/{latitude}/{longitude}?key={din-api-nyckel}
 
-*En taggs pizzerior:* /tags/{tag_id}/pizzerias?key={din-api-nyckel}
+* *En* *taggs* *pizzerior:* /tags/{tag_id}/pizzerias?key={din-api-nyckel}
 
 
 
