@@ -1,0 +1,17 @@
+{
+    "statusCode" : "200",
+    "statusNote" : "Your request succeeded",
+    "positions"  : [
+        <% @positions.each_with_index do |p,index| %>
+            {
+                "address" : <%= p.address.to_json.html_safe %>,
+                "latitude" : <%= p.latitude.to_json.html_safe %>,
+                "longitude" : <%= p.longitude.to_json.html_safe %>,
+                "link" : "/api/v1/positions/<%= p.id.to_json.html_safe %>?key=<%= @requiredApiKey.key %>"
+            }
+            <% unless index == @positions.count - 1 %>
+                ,
+            <% end %>
+        <% end %>
+    ]
+}

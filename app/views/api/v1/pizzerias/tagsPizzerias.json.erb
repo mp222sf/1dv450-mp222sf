@@ -1,0 +1,23 @@
+{
+    "statusCode" : "200",
+    "statusNote" : "Your request succeeded",
+    "tag"        : <%= @tag.name.to_json.html_safe %>,
+    "tag_link"   : "/api/v1/tags/<%= @tag.id.to_json.html_safe %>?key=<%= @requiredApiKey.key %>",
+    "pizzerias"  : [
+        <% @counter = 0 %>
+        <% @pizzeriaTags.each_with_index do |pt,index| %>
+            <% @pizzerias.each_with_index do |p,index| %>
+                <% if pt.pizzeria_id == p.id %>
+                    <% if @counter > 0 %>
+                        ,
+                    <% end %>
+                    {
+                        "name" : <%= p.name.to_json.html_safe %>,
+                        "link" : "/api/v1/pizzerias/<%= p.id.to_json.html_safe %>?key=<%= @requiredApiKey.key %>"
+                    }
+                    <% @counter += 1 %>
+                <% end %>        
+            <% end %>
+        <% end %>
+    ]
+}

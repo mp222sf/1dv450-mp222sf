@@ -1,0 +1,39 @@
+{
+    "statusCode" : "200",
+    "statusNote" : "Your request succeeded",
+    "pizzerias" : [
+                    <% @counter = 0 %>
+                    <% @pizzerias.each_with_index do |p,index| %>
+                        <% if p.position_id == @position.id %>
+                            <% if @counter > 0 %>
+                                ,
+                            <% end %>
+                            {
+                                "name" : <%= p.name.to_json.html_safe %>,
+                                "latitude" : <%= @position.latitude.to_json.html_safe %>,
+                                "longitude" : <%= @position.longitude.to_json.html_safe %>,
+                                "distance_to" : "0.0 km",
+                                "link" : "/api/v1/pizzerias/<%= p.id.to_json.html_safe %>?key=<%= @requiredApiKey.key %>"
+                            }
+                            <% @counter += 1 %>
+                        <% end %>
+                    <% end %>
+                    <% for pos in @position.nearbys(79) %>
+                        <% @pizzerias.each_with_index do |p,index| %>
+                            <% if p.position_id == pos.id %>
+                            <% if @counter > 0 %>
+                                ,
+                            <% end %>
+                            {
+                                "name" : <%= p.name.to_json.html_safe %>,
+                                "latitude" : <%= pos.latitude.to_json.html_safe %>,
+                                "longitude" : <%= pos.longitude.to_json.html_safe %>,
+                                "distance_to" : "<%= pos.distance.round(2).to_json.html_safe %> km",
+                                "link" : "/api/v1/pizzerias/<%= p.id.to_json.html_safe %>?key=<%= @requiredApiKey.key %>"
+                            }
+                            <% @counter += 1 %>
+                            <% end %>
+                        <% end %>  
+                    <% end %>
+                 ]
+}

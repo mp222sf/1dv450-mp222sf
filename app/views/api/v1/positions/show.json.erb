@@ -1,0 +1,9 @@
+{
+    "statusCode" : "200",
+    "statusNote" : "Your request succeeded",
+    "position" : {
+                    "address" : <%= @position.address.to_json.html_safe %>,
+                    "latitude" : <%= @position.latitude.to_json.html_safe %>,
+                    "longitude" : <%= @position.longitude.to_json.html_safe %>
+                 }
+}

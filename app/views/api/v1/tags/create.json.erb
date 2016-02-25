@@ -1,0 +1,8 @@
+{
+    "statusCode" : "201",
+    "statusNote" : "Tag was successfully created.",
+    "tag" : {
+                    "id" : <%= @tag.id.to_json.html_safe %>,
+                    "name" : <%= @tag.name.to_json.html_safe %>
+                 }
+}

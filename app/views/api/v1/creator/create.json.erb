@@ -1,0 +1,9 @@
+{
+    "statusCode" : "201",
+    "statusNote" : "Creator was successfully created.",
+    "creator" : {
+                    "id" : <%= @creator.id.to_json.html_safe %>,
+                    "firstName" : <%= @creator.firstName.to_json.html_safe %>,
+                    "lastName" : <%= @creator.lastName.to_json.html_safe %>
+                 }
+}

@@ -1,0 +1,12 @@
+{
+    "statusCode" : "201",
+    "statusNote" : "Menu was successfully updated.",
+    "menu" : {
+                    "id" : <%= @menu.id.to_json.html_safe %>,
+                    "name" : <%= @menu.name.to_json.html_safe %>,
+                    "pizzeria" : {
+                        "id" : <%= @menu.pizzeria_id.to_json.html_safe %>,
+                        "link" : "/api/v1/pizzerias/<%= @menu.pizzeria_id.to_json.html_safe %>"
+                    }
+                 }
+}

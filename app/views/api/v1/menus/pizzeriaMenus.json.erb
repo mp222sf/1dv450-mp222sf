@@ -1,0 +1,32 @@
+{
+    "statusCode" : "200",
+    "statusNote" : "Your request succeeded",
+    "pizzeria_link" : "/api/v1/pizzerias/<%= @pizzeria.id.to_json.html_safe %>?key=<%= @requiredApiKey.key %>",
+    "menus"  : [
+        <% @menus.each_with_index do |m,index| %>
+            {
+                "name" : <%= m.name.to_json.html_safe %>,
+                "link" : "/api/v1/menus/<%= m.id.to_json.html_safe %>?key=<%= @requiredApiKey.key %>",
+                "dishes" : [
+                    <% @counter = 0 %>
+                    <% @dishes.each_with_index do |d,index_dish| %>
+                        <% if d.menu_id == m.id%>
+                            <% if @counter > 0 %>
+                                ,
+                            <% end %>
+                            {
+                                "name" : <%= d.name.to_json.html_safe %>,
+                                "ingredients" : <%= d.ingredients.to_json.html_safe %>,
+                                "price" : <%= d.price.to_json.html_safe %>
+                            }
+                            <% @counter += 1 %>
+                        <% end %>
+                    <% end %>  
+                    ]
+            }
+            <% unless index == @menus.count - 1 %>
+                ,
+            <% end %>
+        <% end %>            
+    ]
+}

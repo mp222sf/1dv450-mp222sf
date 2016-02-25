@@ -1,0 +1,15 @@
+{
+    "statusCode" : "200",
+    "statusNote" : "Your request succeeded",
+    "tags"  : [
+            <% @tags.each_with_index do |t,index_tags| %>
+                {
+                    "name" : <%= t.name.to_json.html_safe %>,
+                    "link" : "/api/v1/tags/<%= t.id.to_json.html_safe %>?key=<%= @requiredApiKey.key %>"
+                }
+                <% unless index_tags == @tags.count - 1 %>
+                    ,
+                <% end %>
+            <% end %>
+    ]
+}

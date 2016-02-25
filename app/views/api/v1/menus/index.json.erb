@@ -1,0 +1,16 @@
+{
+    "statusCode" : "200",
+    "statusNote" : "Your request succeeded",
+    "menus"  : [
+        <% @menus.each_with_index do |m,index| %>
+            {
+                "name" : <%= m.name.to_json.html_safe %>,
+                "link" : "/api/v1/menus/<%= m.id.to_json.html_safe %>?key=<%= @requiredApiKey.key %>",
+                "pizzeria_link" : "/api/v1/pizzerias/<%= m.pizzeria_id.to_json.html_safe %>?key=<%= @requiredApiKey.key %>"
+            }
+            <% unless index == @menus.count - 1 %>
+                ,
+            <% end %>
+        <% end %>            
+    ]
+}

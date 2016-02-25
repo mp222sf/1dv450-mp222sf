@@ -31,4 +31,27 @@ class ApplicationController < ActionController::Base
           redirect_to root_path
     end
   end
+  
+  def requireApiKey
+    if !ApiKey.exists?(:key => params[:key])
+      render 'shared/errorApiKey.json.erb', :status => :unauthorized
+    else 
+      @requiredApiKey = ApiKey.find_by_key(params[:key])
+    end
+  end
+  
+  def headersLastModified
+    headers['Last-Modified'] = Time.now.httpdate
+  end
+  
+  def error404
+    render 'shared/error.json.erb', :status => :not_found
+  end
+  
+  def error400
+    render 'shared/errorCreate.json.erb', :status => :bad_request
+  end
+  
+  $basicUsername = 'admin'
+  $basicPassword = 'secret'
 end

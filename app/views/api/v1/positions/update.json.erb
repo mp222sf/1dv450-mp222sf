@@ -1,0 +1,10 @@
+{
+    "statusCode" : "201",
+    "statusNote" : "Position was successfully updated.",
+    "position" : {
+                    "id" : <%= @position.id.to_json.html_safe %>,
+                    "address" : <%= @position.address.to_json.html_safe %>,
+                    "latitude" : <%= @position.latitude.to_json.html_safe %>,
+                    "longitude" : <%= @position.longitude.to_json.html_safe %>
+                 }
+}

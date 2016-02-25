@@ -1,0 +1,8 @@
+{
+    "statusCode" : "200",
+    "statusNote" : "Your request succeeded",
+    "creator" : {
+                    "firstName" : <%= @creator.firstName.to_json.html_safe %>,
+                    "lastName" : <%= @creator.lastName.to_json.html_safe %>
+                 }
+}

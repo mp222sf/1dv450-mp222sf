@@ -1,0 +1,14 @@
+{
+    "statusCode" : "201",
+    "statusNote" : "Dish was successfully created.",
+    "dish" : {
+                    "id" : <%= @dish.id.to_json.html_safe %>,
+                    "name" : <%= @dish.name.to_json.html_safe %>,
+                    "ingredients" : <%= @dish.ingredients.to_json.html_safe %>,
+                    "price" : <%= @dish.price.to_json.html_safe %>,
+                    "menu" : {
+                        "id" : <%= @dish.menu_id.to_json.html_safe %>,
+                        "link" : "/api/v1/menus/<%= @dish.menu_id.to_json.html_safe %>"
+                    }
+                 }
+}

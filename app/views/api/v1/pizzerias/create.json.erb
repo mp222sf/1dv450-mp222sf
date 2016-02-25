@@ -1,0 +1,31 @@
+{
+    "statusCode" : "201",
+    "statusNote" : "Pizzeria, Position, Creator and Tags was successfully created.",
+    "pizzeria" : {
+                    "id" : <%= @pizzeria.id.to_json.html_safe %>,
+                    "name" : <%= @pizzeria.name.to_json.html_safe %>,
+                    "position" : {
+                        "latitude" : <%= @position.latitude.to_json.html_safe %>,
+                        "longitude" : <%= @position.longitude.to_json.html_safe %>,
+                        "link" : "/api/v1/positions/<%= @position.id.to_json.html_safe %>"
+                    },
+                    "creator" : {
+                        "firstName" : <%= @creator.firstName.to_json.html_safe %>,
+                        "lastName" : <%= @creator.lastName.to_json.html_safe %>,
+                        "link" : "/api/v1/creator/<%= @creator.id.to_json.html_safe %>"
+                    },
+                    "tags" : [
+                        <% @tags.each_with_index do |t,index| %>
+                            { 
+                                "name" : <%= t.name.to_json.html_safe %>,
+                                "link" : "/api/v1/tags/<%= t.id.to_json.html_safe %>"
+                            }
+                            <% unless index == @tags.count - 1 %>
+                                ,
+                            <% end %>
+                        <% end %>
+                    ]
+                 }
+}
+
+<%= @tags %>
