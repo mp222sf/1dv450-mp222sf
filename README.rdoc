@@ -83,7 +83,7 @@ Till POST och PUT-metoder så skickas även en body med.
 
 === Skapa (POST)
 
-*Pizzeria:*
+==== Pizzeria
 
 POST: /pizzerias
 
@@ -108,7 +108,7 @@ POST: /pizzerias
         }
   }
 
-*Menu:*
+==== Menu
 
 POST: /menus
 
@@ -121,7 +121,7 @@ POST: /menus
         }
   }
 
-*Dish:*
+==== Dish
 
 POST: /dishes
 
@@ -138,7 +138,7 @@ POST: /dishes
 
 == Uppdatera (PUT)
 
-*Creator:*
+==== Creator
 
 PUT: /creator/3
 
@@ -151,7 +151,7 @@ PUT: /creator/3
         }
   }
 
-*Tag:*
+==== Tag
 
 PUT: /tags/3
 
@@ -163,7 +163,7 @@ PUT: /tags/3
         }
   }
 
-*Position:*
+==== Position
 
 PUT: /positions/2
 
@@ -176,7 +176,7 @@ PUT: /positions/2
         }
   }
 
-*Menu:*
+==== Menu
 
 PUT: /menus/2
 
@@ -189,7 +189,7 @@ PUT: /menus/2
         }
   }
 
-*Dish:*
+==== Dish
 
 PUT: /dishes/2
 
@@ -205,7 +205,7 @@ PUT: /dishes/2
   }
 
 == Radera (DELETE)
-*Menu:* /menus/{menu_id}
+Menu:* /menus/{menu_id}
 
 DELETE: /menus/3
 
