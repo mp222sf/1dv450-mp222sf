@@ -196,8 +196,17 @@ PUT: /dishes/2
 
 == Radera (DELETE)
 * *Menu:* /menus/{menu_id}
+
+DELETE: /menus/3
+
 * *Dish:* /dishes/{dish_id}
+
+DELETE: /dishes/3
+
 * *Pizzeria:* /pizzerias/{pizzeria_id}
 
+DELETE: /pizzerias/3
+
+Raderar Pizzeria, Position, Creator, PizzeriaTag
 
 
