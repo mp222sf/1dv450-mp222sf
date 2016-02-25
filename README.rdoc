@@ -20,7 +20,7 @@ Lösenord: password
 = API-dokumentation
 
 Till varje GET-förfrågan måste en giltlig API-nyckel skickas med. Läggs till som en "Query string" i URL:en.
-Ex. https://webbramverk-1dv450-mp222sf.c9users.io/pizzerias?key=83f8f2cebf797ef2asdssa12asd123d
+*Exempel:* https://webbramverk-1dv450-mp222sf.c9users.io/pizzerias?key=83f8f2cebf797ef2asdssa12asd123d
 
 == Hämta (GET)
 === Alla
@@ -48,11 +48,19 @@ Ex. https://webbramverk-1dv450-mp222sf.c9users.io/pizzerias?key=83f8f2cebf797ef2
 == Övriga
 * *En* *pizzerias* *menyer:* /pizzerias/{pizzeria_id}/menus?key={din-api-nyckel}
 
+*Exempel:* /pizzerias/13/menus?key=283bcb40ca046250f719cd414e35asdfbc9e0101
+
 * *En* *pizzerias* *taggar:* /pizzerias/{pizzeria_id}/tags?key={din-api-nyckel}
+
+*Exempel:* /pizzerias/13/tags?key=283bcb40ca046250f719cd414e35asdfbc9e0101
 
 * *Pizzerior* *runtom* *koordinater:* /pizzerias/{latitude}/{longitude}?key={din-api-nyckel}
 
+*Exempel:* /pizzerias/13.1238/8.3333?key=283bcb40ca046250f719cd414e35asdfbc9e0101
+
 * *En* *taggs* *pizzerior:* /tags/{tag_id}/pizzerias?key={din-api-nyckel}
+
+*Exempel:* /tags/2/pizzerias?key=283bcb40ca046250f719cd414e35asdfbc9e0101
 
 
 
