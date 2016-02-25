@@ -205,18 +205,22 @@ PUT: /dishes/2
   }
 
 == Radera (DELETE)
-Menu:* /menus/{menu_id}
+==== Menu
 
 DELETE: /menus/3
 
-*Dish:* /dishes/{dish_id}
+- Raderar en Menu och Menus Dishes.
+
+==== Dish
 
 DELETE: /dishes/3
 
-*Pizzeria:* /pizzerias/{pizzeria_id}
+- Raderar en Dish.
+
+==== Pizzeria
 
 DELETE: /pizzerias/3
 
-Raderar Pizzeria, Position, Creator, PizzeriaTag
+- Raderar Pizzeria, Position, Creator, PizzeriaTag.
 
 
