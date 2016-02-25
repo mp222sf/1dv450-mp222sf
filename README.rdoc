@@ -21,50 +21,50 @@ Lösenord: password
 == Hämta (GET)
 
 Till varje GET-förfrågan måste en giltlig API-nyckel skickas med. Läggs till som en "Query string" i URL:en.
-*Exempel:* https://webbramverk-1dv450-mp222sf.c9users.io/pizzerias?key=83f8f2cebf797ef2asdssa12asd123d
+*Exempel:* https://webbramverk-1dv450-mp222sf.c9users.io/api/v1/pizzerias?key=83f8f2cebf797ef2asdssa12asd123d
 
 === Alla
-* *Pizzerior:* /pizzerias?key={din-api-nyckel}
+* *Pizzerior:* /api/v1/pizzerias?key={din-api-nyckel}
 
-* *Positioner:* /positions?key={din-api-nyckel}
+* *Positioner:* /api/v1/positions?key={din-api-nyckel}
 
-* *Menyer:* /menus?key={din-api-nyckel}
+* *Menyer:* /api/v1/menus?key={din-api-nyckel}
 
 *Andra* *parametrar:* Limit = max antal objekt. Offset = startobjekt.
 
-*Exempel:* /pizzerias?key=283bcb40ca046250f719cd414e35asdfbc9e0101&offset=5&limit=3
+*Exempel:* /api/v1/pizzerias?key=283bcb40ca046250f719cd414e35asdfbc9e0101&offset=5&limit=3
 
 == En specifik
-* *Pizzeria:* /pizzerias/{id}?key={din-api-nyckel}
+* *Pizzeria:* /api/v1/pizzerias/{id}?key={din-api-nyckel}
 
-* *Position:* /positions/{id}?key={din-api-nyckel}
+* *Position:* /api/v1/positions/{id}?key={din-api-nyckel}
 
-* *Meny:* /menus/{id}?key={din-api-nyckel}
+* *Meny:* /api/v1/menus/{id}?key={din-api-nyckel}
 
-* *Creator:* /creator/{id}?key={din-api-nyckel}
+* *Creator:* /api/v1/creator/{id}?key={din-api-nyckel}
 
-*Exempel:* /pizzerias/13?key=283bcb40ca040f719asdcd414e328d5fbc9e0101
+*Exempel:* /api/v1/pizzerias/13?key=283bcb40ca040f719asdcd414e328d5fbc9e0101
 
 == Övriga
-*En* *pizzerias* *menyer:* /pizzerias/{pizzeria_id}/menus?key={din-api-nyckel}
+*En* *pizzerias* *menyer:* /api/v1/pizzerias/{pizzeria_id}/menus?key={din-api-nyckel}
 
-- *Exempel:* /pizzerias/13/menus?key=283bcb40ca046250f719cd414e35asdfbc9e0101
+- *Exempel:* /api/v1/pizzerias/13/menus?key=283bcb40ca046250f719cd414e35asdfbc9e0101
 
-*En* *pizzerias* *taggar:* /pizzerias/{pizzeria_id}/tags?key={din-api-nyckel}
+*En* *pizzerias* *taggar:* /api/v1/pizzerias/{pizzeria_id}/tags?key={din-api-nyckel}
 
-- *Exempel:* /pizzerias/13/tags?key=283bcb40ca046250f719cd414e35asdfbc9e0101
+- *Exempel:* /api/v1/pizzerias/13/tags?key=283bcb40ca046250f719cd414e35asdfbc9e0101
 
-*Pizzerior* *runtom* *koordinater:* /pizzerias/{latitude}/{longitude}?key={din-api-nyckel}
+*Pizzerior* *runtom* *koordinater:* /api/v1/pizzerias/{latitude}/{longitude}?key={din-api-nyckel}
 
-- *Exempel:* /pizzerias/13.1238/8.3333?key=283bcb40ca046250f719cd414e35asdfbc9e0101
+- *Exempel:* /api/v1/pizzerias/13.1238/8.3333?key=283bcb40ca046250f719cd414e35asdfbc9e0101
 
-*En* *taggs* *pizzerior:* /tags/{tag_id}/pizzerias?key={din-api-nyckel}
+*En* *taggs* *pizzerior:* /api/v1/tags/{tag_id}/pizzerias?key={din-api-nyckel}
 
-- *Exempel:* /tags/2/pizzerias?key=283bcb40ca046250f719cd414e35asdfbc9e0101
+- *Exempel:* /api/v1/tags/2/pizzerias?key=283bcb40ca046250f719cd414e35asdfbc9e0101
 
-*S\öka* *efter* *pizzeria:* /search/{word}?key={din-api-nyckel}
+*S\öka* *efter* *pizzeria:* /api/v1/search/{word}?key={din-api-nyckel}
 
-- *Exempel:* /search/victoria?key=283bcb40ca046250f719cd414e35asdfbc9e0101
+- *Exempel:* /api/v1/search/victoria?key=283bcb40ca046250f719cd414e35asdfbc9e0101
 
 == Unsafe Methods (CREATE, UPDATE, DELETE)
 
@@ -85,7 +85,7 @@ Till POST och PUT-metoder så skickas även en body med.
 
 ==== Pizzeria
 
-POST: /pizzerias
+POST: /api/v1/pizzerias
 
 *Exempel-Body:*
 
@@ -110,7 +110,7 @@ POST: /pizzerias
 
 ==== Menu
 
-POST: /menus
+POST: /api/v1/menus
 
 *Exempel-Body:*
 
@@ -123,7 +123,7 @@ POST: /menus
 
 ==== Dish
 
-POST: /dishes
+POST: /api/v1/dishes
 
 *Exempel-Body:*
 
@@ -140,7 +140,7 @@ POST: /dishes
 
 ==== Creator
 
-PUT: /creator/3
+PUT: /api/v1/creator/3
 
 *Exempel-Body:*
 
@@ -153,7 +153,7 @@ PUT: /creator/3
 
 ==== Tag
 
-PUT: /tags/3
+PUT: /api/v1/tags/3
 
 *Exempel-Body:*
 
@@ -165,7 +165,7 @@ PUT: /tags/3
 
 ==== Position
 
-PUT: /positions/2
+PUT: /api/v1/positions/2
 
 *Exempel-Body:*
 
@@ -178,7 +178,7 @@ PUT: /positions/2
 
 ==== Menu
 
-PUT: /menus/2
+PUT: /api/v1/menus/2
 
 *Exempel-Body:*
 
@@ -191,7 +191,7 @@ PUT: /menus/2
 
 ==== Dish
 
-PUT: /dishes/2
+PUT: /api/v1/dishes/2
 
 *Exempel-Body:*
 
@@ -207,19 +207,19 @@ PUT: /dishes/2
 == Radera (DELETE)
 ==== Menu
 
-DELETE: /menus/3
+DELETE: /api/v1/menus/3
 
 - Raderar en Menu och Menus Dishes.
 
 ==== Dish
 
-DELETE: /dishes/3
+DELETE: /api/v1/dishes/3
 
 - Raderar en Dish.
 
 ==== Pizzeria
 
-DELETE: /pizzerias/3
+DELETE: /api/v1/pizzerias/3
 
 - Raderar Pizzeria, Position, Creator, PizzeriaTag.
 
