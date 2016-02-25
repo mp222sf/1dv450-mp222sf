@@ -18,11 +18,11 @@ Användarnamn: admin
 Lösenord: password
 
 = API-dokumentation
+== Hämta (GET)
 
 Till varje GET-förfrågan måste en giltlig API-nyckel skickas med. Läggs till som en "Query string" i URL:en.
 *Exempel:* https://webbramverk-1dv450-mp222sf.c9users.io/pizzerias?key=83f8f2cebf797ef2asdssa12asd123d
 
-== Hämta (GET)
 === Alla
 * *Pizzerior:* /pizzerias?key={din-api-nyckel}
 
@@ -30,7 +30,7 @@ Till varje GET-förfrågan måste en giltlig API-nyckel skickas med. Läggs till
 
 * *Menyer:* /menus?key={din-api-nyckel}
 
-* *Andra* *parametrar:* Limit = max antal objekt. Offset = startobjekt.
+*Andra* *parametrar:* Limit = max antal objekt. Offset = startobjekt.
 
 *Exempel:* /pizzerias?key=283bcb40ca046250f719cd414e35asdfbc9e0101&offset=5&limit=3
 
@@ -58,9 +58,146 @@ Till varje GET-förfrågan måste en giltlig API-nyckel skickas med. Läggs till
 
 *Exempel:* /pizzerias/13.1238/8.3333?key=283bcb40ca046250f719cd414e35asdfbc9e0101
 
-* *En* *taggs* *pizzerior:* /tags/{tag_id}/pizzerias?key={din-api-nyckel}
+*En* *taggs* *pizzerior:* /tags/{tag_id}/pizzerias?key={din-api-nyckel}
 
 *Exempel:* /tags/2/pizzerias?key=283bcb40ca046250f719cd414e35asdfbc9e0101
+
+== Unsafe Methods (CREATE, UPDATE, DELETE)
+
+Till varje Unsafe-method måste följande skickas med i Headern: 
+* Content-Type : application/json
+* Accept : application/json
+* Authorization : Basic {användaruppgifter-i-base64-format} (admin:secret)
+
+Till POST och PUT-metoder så skickas även en body med.
+
+=== Skapa (POST)
+
+* *Pizzeria:* /pizzerias
+
+*Exempel:*
+
+POST: /pizzerias
+
+  {
+    "pizzeria": {
+            "name": "Pizzerianamn",
+            "position": {  
+                "latitude": 50.123456,
+                "longitude": 25.123456
+            },
+            "creator": {  
+                "firstName": "Ett",
+                "lastName": "Namn"
+            },
+            "tags": [
+                { "name": "Kebab" },
+                { "name": "Gyros" },
+                { "name": "Sallad" }
+              ]
+        }
+  }
+
+* *Menu:* /menus
+
+*Exempel:*
+
+POST: /menus
+
+  {
+    "menu": {
+            "name": "Menynamn",
+            "pizzeria_id": 1
+        }
+  }
+
+* *Dish:* /dishes
+
+*Exempel:*
+
+POST: /dishes
+
+  {
+    "dish": {
+            "name": "En rätt",
+            "ingredients": "Rättens ingredienser",
+            "price": 79,
+            "menu_id": 2
+        }
+  }
+
+== Uppdatera (PUT)
+
+* *Creator:* /creator/{creator_id}
+
+*Exempel:*
+
+PUT: /creator/3
+
+  {
+    "creator": {
+            "firstName": "Mark",
+            "lastName" : "Stone"
+        }
+  }
+
+* *Tag:* /tags/{tag_id}
+
+*Exempel:*
+
+PUT: /tags/3
+
+  {
+    "tag": {
+            "name": "Salladsbar"
+        }
+  }
+
+* *Position:* /positions/{positions_id}
+
+*Exempel:*
+
+PUT: /positions/2
+
+ {
+    "position": {
+            "latitude": 13.3337,
+            "longitude" : 24.4448
+        }
+  }
+
+* *Menu:* /menus/{menu_id}
+
+*Exempel:*
+
+PUT: /menus/2
+
+ {
+    "menu": {
+            "name": "Salladsmeny",
+            "pizzeria_id": 2
+        }
+  }
+
+* *Dish:* /dishes/{dish_id}
+
+*Exempel:*
+
+PUT: /dishes/2
+
+  {
+    "dish": {
+            "name": "Gyrospizza",
+            "ingredients": "Tomatsås, ost, lök, kebab, sås, fefferoni",
+            "price": 80,
+            "menu_id": 2
+        }
+  }
+
+== Radera (DELETE)
+* *Menu:* /menus/{menu_id}
+* *Dish:* /dishes/{dish_id}
+* *Pizzeria:* /pizzerias/{pizzeria_id}
 
 
 
