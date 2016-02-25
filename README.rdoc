@@ -71,17 +71,23 @@ Till varje GET-förfrågan måste en giltlig API-nyckel skickas med. Läggs till
 Till varje Unsafe-method måste följande skickas med i Headern: 
 * Content-Type : application/json
 * Accept : application/json
-* Authorization : Basic {användaruppgifter-i-base64-format} (admin:secret)
+* Authorization : Basic YWRtaW46c2VjcmV0
+
+Authorization är krypterat till base64.
+
+*Username* : admin
+
+*Password* : secret
 
 Till POST och PUT-metoder så skickas även en body med.
 
 === Skapa (POST)
 
-* *Pizzeria:* /pizzerias
-
-*Exempel:*
+*Pizzeria:*
 
 POST: /pizzerias
+
+*Exempel-Body:*
 
   {
     "pizzeria": {
@@ -102,11 +108,11 @@ POST: /pizzerias
         }
   }
 
-* *Menu:* /menus
-
-*Exempel:*
+*Menu:*
 
 POST: /menus
+
+*Exempel-Body:*
 
   {
     "menu": {
@@ -115,11 +121,11 @@ POST: /menus
         }
   }
 
-* *Dish:* /dishes
-
-*Exempel:*
+*Dish:*
 
 POST: /dishes
+
+*Exempel-Body:*
 
   {
     "dish": {
@@ -132,11 +138,11 @@ POST: /dishes
 
 == Uppdatera (PUT)
 
-* *Creator:* /creator/{creator_id}
-
-*Exempel:*
+*Creator:*
 
 PUT: /creator/3
+
+*Exempel-Body:*
 
   {
     "creator": {
@@ -145,11 +151,11 @@ PUT: /creator/3
         }
   }
 
-* *Tag:* /tags/{tag_id}
-
-*Exempel:*
+*Tag:*
 
 PUT: /tags/3
+
+*Exempel-Body:*
 
   {
     "tag": {
@@ -157,11 +163,11 @@ PUT: /tags/3
         }
   }
 
-* *Position:* /positions/{positions_id}
-
-*Exempel:*
+*Position:*
 
 PUT: /positions/2
+
+*Exempel-Body:*
 
  {
     "position": {
@@ -170,11 +176,11 @@ PUT: /positions/2
         }
   }
 
-* *Menu:* /menus/{menu_id}
-
-*Exempel:*
+*Menu:*
 
 PUT: /menus/2
+
+*Exempel-Body:*
 
  {
     "menu": {
@@ -183,11 +189,11 @@ PUT: /menus/2
         }
   }
 
-* *Dish:* /dishes/{dish_id}
-
-*Exempel:*
+*Dish:*
 
 PUT: /dishes/2
+
+*Exempel-Body:*
 
   {
     "dish": {
@@ -199,15 +205,15 @@ PUT: /dishes/2
   }
 
 == Radera (DELETE)
-* *Menu:* /menus/{menu_id}
+*Menu:* /menus/{menu_id}
 
 DELETE: /menus/3
 
-* *Dish:* /dishes/{dish_id}
+*Dish:* /dishes/{dish_id}
 
 DELETE: /dishes/3
 
-* *Pizzeria:* /pizzerias/{pizzeria_id}
+*Pizzeria:* /pizzerias/{pizzeria_id}
 
 DELETE: /pizzerias/3
 
