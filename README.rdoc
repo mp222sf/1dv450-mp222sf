@@ -21,6 +21,8 @@ Lösenord: password
 
 *Postman:* https://www.getpostman.com/collections/35c6e936c60f1f60cb4d
 
+http://pavic10.byethost17.com/relations.png
+
 == Hämta (GET)
 
 Till varje GET-förfrågan måste en giltlig API-nyckel skickas med. Läggs till som en "Query string" i URL:en.
