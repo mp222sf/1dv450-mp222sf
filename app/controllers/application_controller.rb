@@ -52,6 +52,11 @@ class ApplicationController < ActionController::Base
     render 'shared/errorCreate.json.erb', :status => :bad_request
   end
   
+  def number_or_nil(string)
+      num = string.to_i
+      num if num.to_s == string
+  end
+  
   $basicUsername = 'admin'
   $basicPassword = 'secret'
 end

@@ -1,0 +1,8 @@
+{
+    "statusCode" : "201",
+    "statusNote" : "PizzeriaTag was successfully created.",
+    "pizzeriaTag" : {
+                    "pizzeria_id" : <%= @pizzeriaTag.pizzeria_id.to_json.html_safe %>,
+                    "tag_id" : <%= @pizzeriaTag.tag_id.to_json.html_safe %>
+                 }
+}

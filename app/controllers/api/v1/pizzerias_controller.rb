@@ -1,7 +1,7 @@
 module Api
     module V1
         class PizzeriasController < ApplicationController
-            before_action :requireApiKey, :headersLastModified, :only => [:index, :show, :coordinates]
+            before_action :requireApiKey, :headersLastModified, :only => [:index, :show, :coordinates, :create, :destroy]
             http_basic_authenticate_with name: $basicUsername, password: $basicPassword, :only => [:create, :update, :destroy]
             skip_before_filter :verify_authenticity_token, :only => [:create, :update, :destroy]
             
@@ -14,6 +14,7 @@ module Api
                         @tag = Tag.find(params[:tag_id])
                         @pizzeriaTags = PizzeriaTag.where(tag_id: params[:tag_id])
                         @pizzerias = Pizzerium.order('created_at').all
+                        @positions = Position.all
                         
                         render 'tagsPizzerias'
                     else
@@ -21,9 +22,19 @@ module Api
                     end
                 else
                     @pizzerias = Pizzerium.order('created_at DESC').all
+                    @positions = Position.all
+                    @menus = Menu.all
+                    @dishes = Dish.all
                     
-                    if params[:limit] != nil && params[:offset] != nil
-                        @pizzerias = Pizzerium.order('created_at DESC').limit(params[:limit]).offset(params[:offset])
+                    if number_or_nil(params[:limit]) != nil
+                        @pizzerias = Pizzerium.order('created_at DESC').limit(params[:limit])
+                        if number_or_nil(params[:offset]) != nil
+                            @pizzerias = Pizzerium.order('created_at DESC').limit(params[:limit]).offset(params[:offset])
+                        end
+                    else 
+                        if number_or_nil(params[:offset]) != nil
+                            @pizzerias = Pizzerium.order('created_at DESC').offset(params[:offset])
+                        end
                     end
                     
                     render 'index'
@@ -36,6 +47,8 @@ module Api
                     @pizzeria = Pizzerium.find(params[:id])
                     @position = Position.find(@pizzeria.position_id)
                     @creator = Creator.find(@pizzeria.creator_id)
+                    @tags = Tag.all;
+                    @pizzeriaTags = PizzeriaTag.where(pizzeria_id: params[:id])
                     
                     render 'show'
                 else
@@ -57,32 +70,44 @@ module Api
             
             # Skapar Pizzerium, Position, Creator och Tags.
             def create
-                @position = Position.new(position_params[:position])
-                @position.save
-                @creator = Creator.new(creator_params[:creator])
-                @creator.save
-                @pizzeria = Pizzerium.new(name: pizzeria_params[:name], position_id: @position.id, creator_id: @creator.id)
-        
-                if @pizzeria.save
-                    tags_params[:pizzeria][:tags].each do |t|
-                        if !Tag.exists?(:name => t[:name])
-                            tag = Tag.new(name: t[:name])
-                            tag.save
-                        else 
-                            tag = Tag.where(name: t[:name]).first
+                if pizzeria_params != nil && position_params != nil && creator_params != nil && tags_params != nil
+                    @position = Position.new(position_params[:position])
+                    @position.save
+                    if Creator.exists?(:firstName => creator_params[:creator][:firstName], :lastName => creator_params[:creator][:lastName])
+                        @creator = Creator.where(firstName: creator_params[:creator][:firstName], lastName: creator_params[:creator][:lastName]).first
+                    else
+                        @creator = Creator.new(creator_params[:creator])
+                        @creator.save
+                    end
+                    @pizzeria = Pizzerium.new(name: pizzeria_params[:name], position_id: @position.id, creator_id: @creator.id)
+            
+                    if @pizzeria.save
+                        if tags_params[:pizzeria][:tags] != nil
+                            tags_params[:pizzeria][:tags].each do |t|
+                                if !Tag.exists?(:name => t[:name])
+                                    tag = Tag.new(name: t[:name])
+                                    tag.save
+                                else 
+                                    tag = Tag.where(name: t[:name]).first
+                                end
+                                
+                                pt = PizzeriaTag.new(pizzeria_id: @pizzeria.id, tag_id: tag.id)
+                                pt.save
+                            end
                         end
-                        
-                        pt = PizzeriaTag.new(pizzeria_id: @pizzeria.id, tag_id: tag.id)
-                        pt.save
+                        @tags = Array.new
+                        @pt = PizzeriaTag.where(pizzeria_id: @pizzeria.id)
+                        @pt.each do |t|
+                           @tags.push(Tag.find(t.tag_id)) 
+                        end
+                    
+                        render 'create'
+                    else
+                        @message = "Pizzerian gick inte att skapa."
+                        error400
                     end
-                    @tags = Array.new
-                    @pt = PizzeriaTag.where(pizzeria_id: @pizzeria.id)
-                    @pt.each do |t|
-                       @tags.push(Tag.find(t.tag_id)) 
-                    end
-                
-                    render 'create'
                 else
+                    @message = "Du har angett fel parametrar."
                     error400
                 end
             end
@@ -92,36 +117,51 @@ module Api
                 if Pizzerium.exists?(:id => params[:id])
                     pizzeria = Pizzerium.find(params[:id])
                     position = Position.find(pizzeria.position_id)
-                    creator = Creator.find(pizzeria.creator_id)
                     PizzeriaTag.where(pizzeria_id: pizzeria.id).delete_all
-                    creator.destroy
                     position.destroy
                     pizzeria.destroy
         
                     render 'delete'
                 else
+                    @message = "Pizzerian gick inte att radera. Pizzerian existerar inte."
                     error400
                 end
             end
             
             # Hämta parametrar till en Pizzerium.
             def pizzeria_params
-                params.require(:pizzeria).permit(:name)
+                begin
+                    params.require(:pizzeria).permit(:name)
+                rescue
+                    nil
+                end
             end
             
             # Hämta parametrar till en Position.
             def position_params
-                params.require(:pizzeria).permit(position: [ :latitude, :longitude ])
+                begin
+                    params.require(:pizzeria).permit(position: [ :address ])
+                rescue
+                    nil
+                end
             end
             
             # Hämta parametrar till en Creator.
             def creator_params
-                params.require(:pizzeria).permit(creator: [ :firstName, :lastName ])
+                begin
+                    params.require(:pizzeria).permit(creator: [ :firstName, :lastName ])
+                rescue
+                    nil
+                end
             end
             
             # Hämta parametrar till flera Tags.
             def tags_params
-                params.permit(pizzeria: [ { tags: :name } ])
+                begin
+                    params.permit(pizzeria: [ { tags: :name } ])
+                rescue
+                    nil
+                end
             end
         end
     end

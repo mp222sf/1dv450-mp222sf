@@ -1,7 +1,7 @@
 module Api
     module V1
         class PositionsController < ApplicationController
-            before_action :requireApiKey, :headersLastModified, :only => [:index, :show]
+            before_action :requireApiKey, :headersLastModified, :only => [:index, :show, :create, :update, :destroy]
             http_basic_authenticate_with name: $basicUsername, password: $basicPassword, :only => [:new, :create, :update, :destroy]
             skip_before_filter :verify_authenticity_token, :only => [:new, :create, :update, :destroy]
             
@@ -9,8 +9,15 @@ module Api
             def index
                 @positions = Position.all
                 
-                if params[:limit] != nil && params[:offset] != nil
-                    @positions = Position.limit(params[:limit]).offset(params[:offset])
+                if number_or_nil(params[:limit]) != nil
+                    @positions = Position.limit(params[:limit])
+                    if number_or_nil(params[:offset]) != nil
+                        @positions = Position.limit(params[:limit]).offset(params[:offset])
+                    end
+                else 
+                    if number_or_nil(params[:offset]) != nil
+                        @positions = Position.offset(params[:offset])
+                    end
                 end
 
                 render 'index'
@@ -33,22 +40,29 @@ module Api
                 if @position.save
                     render 'create'
                 else
+                    @message = "Positionen gick inte att skapa."
                     error400
                 end
             end
         
             # Uppdatera en Position.
             def update
-                if Position.exists?(:id => params[:id])
-                    
-                    @position = Position.find(params[:id])
-                    @position.address = nil
-                    if @position.update_attributes(positions_params)
-                        render 'update'
+                if positions_params != nil
+                    if Position.exists?(:id => params[:id])
+                        
+                        @position = Position.find(params[:id])
+                        if @position.update_attributes(positions_params)
+                            render 'update'
+                        else
+                            @message = "Positionen gick inte att uppdatera."
+                            error400
+                        end
                     else
+                        @message = "Positionen gick inte att uppdatera. Positionen existerar inte."
                         error400
                     end
                 else
+                    @message = "Du har angett fel parametrar."
                     error400
                 end
             end
@@ -61,13 +75,18 @@ module Api
         
                     render 'delete'
                 else
+                    @message = "Positionen gick inte att radera."
                     error400
                 end
             end
             
             # Hämta parametrar till en Position.
             def positions_params
-                params.require(:position).permit(:address, :latitude, :longitude)
+                begin
+                    params.require(:position).permit(:address, :latitude, :longitude)
+                rescue
+                    nil
+                end
             end
         end
     end

@@ -5,6 +5,7 @@
                     "id" : <%= @pizzeria.id.to_json.html_safe %>,
                     "name" : <%= @pizzeria.name.to_json.html_safe %>,
                     "position" : {
+                                    "address" : <%= @position.address.to_json.html_safe %>,
                                     "longitude" : <%= @position.longitude.to_json.html_safe %>,
                                     "latitude" : <%= @position.latitude.to_json.html_safe %>,
                                     "link" : "/api/v1/positions/<%= @position.id.to_json.html_safe %>?key=<%= @requiredApiKey.key %>"
@@ -13,6 +14,23 @@
                                     "firstName" : <%= @creator.firstName.to_json.html_safe %>,
                                     "lastName" : <%= @creator.lastName.to_json.html_safe %>,
                                     "link" : "/api/v1/creator/<%= @creator.id.to_json.html_safe %>?key=<%= @requiredApiKey.key %>"
-                                 }
+                                 },
+                    "tags" : [
+                                <% @counter = 0 %>
+                                <% @tags.each_with_index do |tag| %>
+                                    <% @pizzeriaTags.each_with_index do |pt| %>
+                                        <% if pt.tag_id == tag.id %>
+                                            <% if @counter > 0 %>
+                                                ,
+                                            <% end %>
+                                            { 
+                                                "id" : <%= tag.id.to_json.html_safe %>,
+                                                "name" : <%= tag.name.to_json.html_safe %> 
+                                            }
+                                            <% @counter += 1 %>
+                                        <% end %>
+                                    <% end %>
+                                <% end %>
+                            ]
                  }
 }

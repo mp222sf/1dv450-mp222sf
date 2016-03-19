@@ -1,0 +1,11 @@
+{
+    "statusCode" : "200",
+    "statusNote" : "Your request succeeded",
+    "dish" : {
+                    "id" : <%= @dish.id.to_json.html_safe %>,
+                    "name" : <%= @dish.name.to_json.html_safe %>,
+                    "ingredients" : <%= @dish.ingredients.to_json.html_safe %>,
+                    "price" : <%= @dish.price.to_json.html_safe %>,
+                    "menu_id" : <%= @dish.menu_id.to_json.html_safe %>
+                 }
+}

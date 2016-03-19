@@ -2,6 +2,7 @@
     "statusCode" : "200",
     "statusNote" : "Your request succeeded",
     "menu" : {
+                    "id" : <%= @menu.id.to_json.html_safe %>,
                     "name" : <%= @menu.name.to_json.html_safe %>,
                     "pizzeria" : {
                                     "name" : <%= @pizzeria.name.to_json.html_safe %>,
@@ -10,6 +11,7 @@
                     "dishes" : [
                             <% @dishes.each_with_index do |d,index_dish| %>
                                 {
+                                    "id" : <%= d.id.to_json.html_safe %>,
                                     "name" : <%= d.name.to_json.html_safe %>,
                                     "ingredients" : <%= d.ingredients.to_json.html_safe %>,
                                     "price" : <%= d.price.to_json.html_safe %>

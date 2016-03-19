@@ -1,0 +1,2 @@
+module PizzeriaTagsHelper
+end

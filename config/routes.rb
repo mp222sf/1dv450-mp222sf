@@ -12,7 +12,6 @@ Rails.application.routes.draw do
   get 'account' => 'welcome#account', as: :account
   get 'showAll' => 'authentications#showAll', as: :showAll
   
-  
   # API Version 1
   namespace :api, defaults: {format: 'json'} do
     namespace :v1 do
@@ -26,13 +25,14 @@ Rails.application.routes.draw do
       resources :menus, only: [:index, :show, :create, :update, :destroy]
       resources :positions, only: [:index, :show, :create, :update, :destroy]
       resources :creator, only: [:show, :create, :update, :destroy]
-      resources :dishes, only: [:create, :update, :destroy]
+      resources :dishes, only: [:show, :create, :update, :destroy]
+      resources :pizzeriatags, only: [:create, :destroy]
     
       get 'search/:word' => 'search#search', as: :search
       get 'errorApiKey' => 'error#apikey', as: :errorApiKey
       get 'error' => 'error#index', as: :error
       
-      constraints(latitude: /\d+\.\d+/, longitude: /\d+\.\d+/) do
+      constraints(latitude: /\-?\d+\.\d+/, longitude: /\-?\d+\.\d+/) do
         get 'pizzerias/:latitude/:longitude' => 'pizzerias#coordinates', as: :coordinates
       end
     end

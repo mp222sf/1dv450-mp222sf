@@ -13,6 +13,13 @@
                     <% end %>
                     {
                         "name" : <%= p.name.to_json.html_safe %>,
+                        <% @positions.each_with_index do |pos| %>
+                            <% if pos.id == p.position_id %>
+                                "address" : <%= pos.address.to_json.html_safe %>,
+                                "latitude" : <%= pos.latitude.to_json.html_safe %>,
+                                "longitude" : <%= pos.longitude.to_json.html_safe %>,
+                            <% end %>
+                        <% end %>
                         "link" : "/api/v1/pizzerias/<%= p.id.to_json.html_safe %>?key=<%= @requiredApiKey.key %>"
                     }
                     <% @counter += 1 %>

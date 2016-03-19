@@ -1,7 +1,7 @@
 module Api
     module V1
         class MenusController < ApplicationController
-            before_action :requireApiKey, :headersLastModified, :only => [:index, :show]
+            before_action :requireApiKey, :headersLastModified, :only => [:index, :show, :create, :update, :destroy]
             http_basic_authenticate_with name: $basicUsername, password: $basicPassword, :only => [:new, :create, :update, :destroy]
             skip_before_filter :verify_authenticity_token, :only => [:new, :create, :update, :destroy]
             
@@ -21,8 +21,15 @@ module Api
                 else
                     @menus = Menu.all
                     
-                    if params[:limit] != nil && params[:offset] != nil
-                        @menus = Menu.limit(params[:limit]).offset(params[:offset])
+                    if number_or_nil(params[:limit]) != nil
+                        @menus = Menu.limit(params[:limit])
+                        if number_or_nil(params[:offset]) != nil
+                            @menus = Menu.limit(params[:limit]).offset(params[:offset])
+                        end
+                    else 
+                        if number_or_nil(params[:offset]) != nil
+                            @menus = Menu.offset(params[:offset])
+                        end
                     end
                     
                     render 'index'
@@ -44,26 +51,44 @@ module Api
             
             # Skapa en Menu.
             def create
-                @menu = Menu.new(menus_params)
-        
-                if @menu.save
-                    render 'create'
-                else
+                if menus_params != nil
+                    @menu = Menu.new(menus_params)
+                    
+                    if Pizzerium.exists?(:id => @menu.pizzeria_id)
+                        if @menu.save
+                            render 'create'
+                        else
+                            @message = "Det gick inte att spara menyn."
+                            error400
+                        end        
+                    else
+                        @message = "Menyn gick inte att skapa. Pizzerian med ID:t " + @menu.pizzeria_id.to_s + " existerar inte."
+                        error400
+                    end
+                else 
+                    @message = "Du har angett fel parametrar."
                     error400
                 end
             end
             
             # Uppdatera en Menu.
             def update
-                if Menu.exists?(:id => params[:id])
-                    
-                    @menu = Menu.find(params[:id])
-                    if @menu.update_attributes(menus_params)
-                        render 'update'
+                if menus_params != nil
+                    if Menu.exists?(:id => params[:id])
+                        
+                        @menu = Menu.find(params[:id])
+                        if @menu.update_attributes(menus_params)
+                            render 'update'
+                        else
+                            @message = "Det gick inte att uppdatera menyn."
+                            error400
+                        end
                     else
+                        @message = "Menyn gick inte att uppdatera. Pizzerian med ID:t " + @menu.pizzeria_id.to_s + " existerar inte."
                         error400
                     end
                 else
+                    @message = "Du har angett fel parametrar."
                     error400
                 end
             end
@@ -77,13 +102,18 @@ module Api
         
                     render 'delete'
                 else
+                    @message = "Menyn gick inte att radera. Menyn existerar inte."
                     error400
                 end
             end
             
             # Hämta parametrar till en Menu.
             def menus_params
-                params.require(:menu).permit(:name, :pizzeria_id)
+                begin
+                    params.require(:menu).permit(:name, :pizzeria_id)
+                rescue
+                    nil
+                end
             end
         end
     end

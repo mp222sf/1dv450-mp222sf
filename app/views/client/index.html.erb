@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+
+<!-- data-ng-app (data-* is for HTML5 validation) is a directive to auto-bootstrap an angular application -->
+<!-- You can get this scope in an own file e.g. main|app.js -->
+ <html data-ng-app="mainApp">
+   <head>
+    <title>PizzaKartan</title>
+   </head>
+   <body>
+     
+     <h1>First demo AngularJS!</h1>
+      <!-- This is a controller - It's scope is in the div-tag -->
+      <!-- Uning the ControllerAs-thing make nice namespacing -->
+      <div class="container" data-ng-controller="DemoController">
+       
+       <!-- data-ng-model sets a property which is databinded in the  script -->
+       <input type="text" data-ng-model="name" />
+ 
+       <!-- Declarative call to the scopes method -->
+          
+       <h2>Hello {{ name }}!!</h2>
+       <button data-ng-click="toggleProps()">Show properties!</button>
+        
+       <!-- ng-show expects a boolean if it should show or not -->
+       <div data-ng-show="isShowingProps">
+           <h3>You are:</h3>  
+           <ul>
+             <li data-ng-repeat="prop in properties">
+               {{ prop }}
+             </li>
+           </ul> 
+       </div>
+      </div> 
+      <!-- Loading the angular script -->
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.js"></script>
+      <script src="/client/mainJS"></script>
+   
+      <!-- Ofcourse this should have its own file -->
+      <script>
+         // This is a mainApp - See the html-tag
+        var myApp = angular.module('mainApp',[]);
+        
+            // Register the controller (get demoController)
+            // Second parameter is the function within the controller is coded
+            myApp.controller('DemoController', DemoController); 
+            
+            // This is Dependency injection
+            // I use this annotation so we don´t get problems with minifing (can differs from littature)
+            // https://docs.angularjs.org/guide/di
+            // Don´t really need this row 
+            DemoController.$inject = ['$scope'];
+            
+            // This is our controller - Should of cource be in a own file...
+            function DemoController($scope) {
+            
+            // Databind (see data-ng-model above) - Scope is the ViewModel => The glue
+            $scope.name = "";
+            $scope.isShowingProps = false;
+            $scope.properties = ["Kind", "Funny", "Admirable"]
+            
+            // A controller method
+            $scope.toggleProps = function() {
+             this.isShowingProps = this.isShowingProps ? false : true;
+            };
+        };
+         
+       </script>
+     
+   </body>
+</html>

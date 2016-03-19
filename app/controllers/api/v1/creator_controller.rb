@@ -1,7 +1,7 @@
 module Api
     module V1
         class CreatorController < ApplicationController
-            before_action :requireApiKey, :headersLastModified, :only => [:show]
+            before_action :requireApiKey, :headersLastModified, :only => [:show, :create, :update, :destroy]
             http_basic_authenticate_with name: $basicUsername, password: $basicPassword, :only => [:create, :update, :destroy]
             skip_before_filter :verify_authenticity_token, :only => [:create, :update, :destroy]
             
@@ -23,21 +23,29 @@ module Api
                 if @creator.save
                     render 'create'
                 else
+                    @message = "Skaparen gick inte att skapa."
                     error400
                 end
             end
         
             # Uppdatera en Creator.
             def update
-                if Creator.exists?(:id => params[:id])
-                    
-                    @creator = Creator.find(params[:id])
-                    if @creator.update_attributes(creator_params)
-                        render 'update'
+                if creator_params != nil
+                    if Creator.exists?(:id => params[:id])
+                        
+                        @creator = Creator.find(params[:id])
+                        if @creator.update_attributes(creator_params)
+                            render 'update'
+                        else
+                            @message = "Skaparen gick inte att uppdatera."
+                            error400
+                        end
                     else
+                        @message = "Skaparen gick inte att uppdatera. Skaparen med ID:t " + @creator.id.to_s + " existerar inte."
                         error400
                     end
                 else
+                    @message = "Du har angett fel parametrar."
                     error400
                 end
             end
@@ -50,13 +58,18 @@ module Api
         
                     render 'delete'
                 else
+                    @message = "Skaparen gick inte att radera."
                     error400
                 end
             end
             
             # Hämta parameterar till Creator.
             def creator_params
-                params.require(:creator).permit(:firstName, :lastName)
+                begin
+                    params.require(:creator).permit(:firstName, :lastName)
+                rescue
+                    nil
+                end
             end
         end
     end

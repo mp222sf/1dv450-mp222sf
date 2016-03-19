@@ -5,6 +5,7 @@
     "menus"  : [
         <% @menus.each_with_index do |m,index| %>
             {
+                "id" : <%= m.id.to_json.html_safe  %>,
                 "name" : <%= m.name.to_json.html_safe %>,
                 "link" : "/api/v1/menus/<%= m.id.to_json.html_safe %>?key=<%= @requiredApiKey.key %>",
                 "dishes" : [
@@ -15,6 +16,7 @@
                                 ,
                             <% end %>
                             {
+                                "id" : <%= d.id.to_json.html_safe  %>,
                                 "name" : <%= d.name.to_json.html_safe %>,
                                 "ingredients" : <%= d.ingredients.to_json.html_safe %>,
                                 "price" : <%= d.price.to_json.html_safe %>

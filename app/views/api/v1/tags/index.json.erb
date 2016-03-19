@@ -4,6 +4,7 @@
     "tags"  : [
             <% @tags.each_with_index do |t,index_tags| %>
                 {
+                    "id" : <%= t.id.to_json.html_safe %>,
                     "name" : <%= t.name.to_json.html_safe %>,
                     "link" : "/api/v1/tags/<%= t.id.to_json.html_safe %>?key=<%= @requiredApiKey.key %>"
                 }
