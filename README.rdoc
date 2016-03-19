@@ -15,7 +15,7 @@
 === Inloggning till Admin
 Användarnamn: admin
 
-Lösenord: secret
+Lösenord: password
 
 = API-dokumentation
 
