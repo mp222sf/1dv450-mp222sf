@@ -5,7 +5,10 @@ module Api
             
             # Presentera Pizzeriums efter sökord.
             def search
-                @search = Pizzerium.where("name like ?", "%#{params[:word]}%")
+                @search = Pizzerium.where("lower(name) like ?", "%#{params[:word]}%")
+                @positions = Position.all
+                @menus = Menu.all
+                @dishes = Dish.all
                 render 'index'
             end
         end

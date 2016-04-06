@@ -2,7 +2,7 @@ module Api
     module V1
         class MenusController < ApplicationController
             before_action :requireApiKey, :headersLastModified, :only => [:index, :show, :create, :update, :destroy]
-            http_basic_authenticate_with name: $basicUsername, password: $basicPassword, :only => [:new, :create, :update, :destroy]
+            before_action :checkToken, :only => [:create, :update, :destroy]
             skip_before_filter :verify_authenticity_token, :only => [:new, :create, :update, :destroy]
             
             # Två alternativ:

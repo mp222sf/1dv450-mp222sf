@@ -44,6 +44,21 @@ class ApplicationController < ActionController::Base
     headers['Last-Modified'] = Time.now.httpdate
   end
   
+  def checkToken
+    if params['token'] != nil
+      begin
+        @data = $crypt.decrypt_and_verify(params['token'])
+        if @data != ($basicUsername + ":" + $basicPassword)
+          @message = "Du har angett fel token."
+          error400
+        end
+      rescue
+        @message = "Du har angett fel token."
+        error400
+      end
+    end
+  end
+  
   def error404
     render 'shared/error.json.erb', :status => :not_found
   end
@@ -59,4 +74,7 @@ class ApplicationController < ActionController::Base
   
   $basicUsername = 'admin'
   $basicPassword = 'secret'
+  $salt = "\323U\030TO\234\357\020\a\337"
+  $key = ActiveSupport::KeyGenerator.new('authorization').generate_key($salt)
+  $crypt = ActiveSupport::MessageEncryptor.new($key)      
 end

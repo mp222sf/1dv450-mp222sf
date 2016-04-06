@@ -12,14 +12,48 @@
                         ,
                     <% end %>
                     {
+                        "id" : <%= p.id.to_json.html_safe %>,
                         "name" : <%= p.name.to_json.html_safe %>,
                         <% @positions.each_with_index do |pos| %>
-                            <% if pos.id == p.position_id %>
-                                "address" : <%= pos.address.to_json.html_safe %>,
+                            <% if p.position_id == pos.id %>
+                                "position_id" : <%= pos.id.to_json.html_safe  %>,
+                                "address" : <%= pos.address.to_json.html_safe  %>,
                                 "latitude" : <%= pos.latitude.to_json.html_safe %>,
                                 "longitude" : <%= pos.longitude.to_json.html_safe %>,
                             <% end %>
                         <% end %>
+                        "menus" : [
+                            <% @menuCounter = 0 %>
+                            <% @menus.each_with_index do |menu| %>
+                                <% if menu.pizzeria_id == p.id %>
+                                    <% if @menuCounter > 0 %>
+                                        ,
+                                    <% end %>
+                                    {
+                                        "id" : <%= menu.id.to_json.html_safe %>,
+                                        "name" : <%= menu.name.to_json.html_safe  %>,
+                                        "dishes" : [
+                                            <% @dishCounter = 0 %>
+                                            <% @dishes.each_with_index do |dish| %>
+                                                <% if dish.menu_id == menu.id %>
+                                                    <% if @dishCounter > 0 %>
+                                                        ,
+                                                    <% end %>
+                                                    {
+                                                        "id" : <%= dish.id.to_json.html_safe %>,
+                                                        "name" : <%= dish.name.to_json.html_safe  %>,
+                                                        "ingredients" : <%= dish.ingredients.to_json.html_safe  %>,
+                                                        "price" : <%= dish.price.to_json.html_safe  %>
+                                                    }
+                                                    <% @dishCounter += 1 %>
+                                                <% end %>
+                                            <% end %>
+                                        ]
+                                    }
+                                    <% @menuCounter += 1 %>
+                                <% end %>
+                            <% end %>
+                        ],
                         "link" : "/api/v1/pizzerias/<%= p.id.to_json.html_safe %>?key=<%= @requiredApiKey.key %>"
                     }
                     <% @counter += 1 %>

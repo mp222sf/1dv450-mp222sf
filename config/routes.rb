@@ -31,6 +31,8 @@ Rails.application.routes.draw do
       get 'search/:word' => 'search#search', as: :search
       get 'errorApiKey' => 'error#apikey', as: :errorApiKey
       get 'error' => 'error#index', as: :error
+      post 'apiLogin' => 'pizzerias#login', as: :apiLogin
+      post 'apiAuth' => 'pizzerias#isAuthorized', as: :apiAuth
       
       constraints(latitude: /\-?\d+\.\d+/, longitude: /\-?\d+\.\d+/) do
         get 'pizzerias/:latitude/:longitude' => 'pizzerias#coordinates', as: :coordinates

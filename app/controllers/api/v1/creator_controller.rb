@@ -2,7 +2,7 @@ module Api
     module V1
         class CreatorController < ApplicationController
             before_action :requireApiKey, :headersLastModified, :only => [:show, :create, :update, :destroy]
-            http_basic_authenticate_with name: $basicUsername, password: $basicPassword, :only => [:create, :update, :destroy]
+            before_action :checkToken, :only => [:create, :update, :destroy]
             skip_before_filter :verify_authenticity_token, :only => [:create, :update, :destroy]
             
             # Presentera en Creator.

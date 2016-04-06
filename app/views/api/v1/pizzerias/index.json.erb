@@ -8,6 +8,7 @@
                 "name" : <%= p.name.to_json.html_safe %>,
                 <% @positions.each_with_index do |pos| %>
                     <% if p.position_id == pos.id %>
+                        "position_id" : <%= pos.id.to_json.html_safe  %>,
                         "address" : <%= pos.address.to_json.html_safe  %>,
                         "latitude" : <%= pos.latitude.to_json.html_safe %>,
                         "longitude" : <%= pos.longitude.to_json.html_safe %>,

@@ -1,9 +1,10 @@
 module Api
     module V1
         class PizzeriasController < ApplicationController
-            before_action :requireApiKey, :headersLastModified, :only => [:index, :show, :coordinates, :create, :destroy]
-            http_basic_authenticate_with name: $basicUsername, password: $basicPassword, :only => [:create, :update, :destroy]
-            skip_before_filter :verify_authenticity_token, :only => [:create, :update, :destroy]
+            before_action :requireApiKey, :headersLastModified, :only => [:index, :show, :coordinates, :create, :destroy, :login, :isAuthorized]
+            before_action :checkToken, :only => [:create, :destroy, :isAuthorized]
+            http_basic_authenticate_with name: $basicUsername, password: $basicPassword, :only => [:login]
+            skip_before_filter :verify_authenticity_token, :only => [:create, :destroy, :login, :isAuthorized]
             
             # Två alternativ:
             # - Presentera alla Pizzeriums (ev. med Limit och Offset).
@@ -15,6 +16,8 @@ module Api
                         @pizzeriaTags = PizzeriaTag.where(tag_id: params[:tag_id])
                         @pizzerias = Pizzerium.order('created_at').all
                         @positions = Position.all
+                        @menus = Menu.all
+                        @dishes = Dish.all
                         
                         render 'tagsPizzerias'
                     else
@@ -117,7 +120,13 @@ module Api
                 if Pizzerium.exists?(:id => params[:id])
                     pizzeria = Pizzerium.find(params[:id])
                     position = Position.find(pizzeria.position_id)
+                    menus = Menu.where(pizzeria_id: params[:id])
+
+                    menus.each do |m|
+                        Dish.where(menu_id: m.id).destroy_all
+                    end
                     PizzeriaTag.where(pizzeria_id: pizzeria.id).delete_all
+                    menus.destroy_all
                     position.destroy
                     pizzeria.destroy
         
@@ -126,6 +135,13 @@ module Api
                     @message = "Pizzerian gick inte att radera. Pizzerian existerar inte."
                     error400
                 end
+            end
+            
+            def login
+                @encrypted_data = $crypt.encrypt_and_sign($basicUsername + ":" + $basicPassword)
+            end
+            
+            def isAuthorized
             end
             
             # Hämta parametrar till en Pizzerium.

@@ -1,9 +1,9 @@
 module Api
     module V1
         class TagsController < ApplicationController
-            before_action :requireApiKey, :headersLastModified, :only => [:index, :show]
-            http_basic_authenticate_with name: $basicUsername, password: $basicPassword, :only => [:new, :create, :update, :destroy]
-            skip_before_filter :verify_authenticity_token, :only => [:new, :create, :update, :destroy]
+            before_action :requireApiKey, :headersLastModified, :only => [:index, :show, :create, :update, :destroy]
+            before_action :checkToken, :only => [:create, :update, :destroy]
+            skip_before_filter :verify_authenticity_token, :only => [:create, :update, :destroy]
             
             # Två alternativ:
             # - Presentera alla Tags (ev. med Limit och Offset).

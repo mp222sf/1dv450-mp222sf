@@ -2,7 +2,7 @@ module Api
     module V1
         class PizzeriatagsController < ApplicationController
             before_action :requireApiKey, :headersLastModified, :only => [:create, :destroy]
-            http_basic_authenticate_with name: $basicUsername, password: $basicPassword, :only => [:create, :destroy]
+            before_action :checkToken, :only => [:create, :destroy]
             skip_before_filter :verify_authenticity_token, :only => [:create, :destroy]
             
             # Skapa en PizzeriaTag.
