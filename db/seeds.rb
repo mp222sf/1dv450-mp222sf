@@ -38,25 +38,25 @@ m4 = Menu.create(name: "Kebabmeny", pizzeria_id: pi2.id)
 m5 = Menu.create(name: "Pastameny", pizzeria_id: pi5.id)
 
 # Dish
-d1 = Dish.create(name: "Kebabsallad", ingredients: "", price: 65, menu_id: m1.id)
-d2 = Dish.create(name: "Gyrossallad", ingredients: "", price: 65, menu_id: m1.id)
-d3 = Dish.create(name: "Räksallad", ingredients: "", price: 65, menu_id: m1.id)
+d1 = Dish.create(name: "Kebabsallad", ingredients: "Sallad, tomat, gurka, lök, peperoni, kebabkött, sås", price: 65, menu_id: m1.id)
+d2 = Dish.create(name: "Gyrossallad", ingredients: "Sallad, tomat, gurka, lök, peperoni, gyroskött, sås", price: 65, menu_id: m1.id)
+d3 = Dish.create(name: "Räksallad", ingredients: "Sallad, tomat, gurka, ost, räkor, citron, sås", price: 65, menu_id: m1.id)
 
 d4 = Dish.create(name: "Capriciosa", ingredients: "Tomatsås, ost, skinka, champinjoner", price: 65, menu_id: m2.id)
 d5 = Dish.create(name: "Vesuvio", ingredients: "Tomatsås, ost, skinka", price: 65, menu_id: m2.id)
-d6 = Dish.create(name: "Cleopatra", ingredients: "Tomatsås, ost, bacon, lök, räkor", price: 65, menu_id: m1.id)
+d6 = Dish.create(name: "Cleopatra", ingredients: "Tomatsås, ost, bacon, lök, räkor", price: 65, menu_id: m2.id)
 
-d7 = Dish.create(name: "Gyrostallrik", ingredients: "", price: 65, menu_id: m3.id)
-d8 = Dish.create(name: "Gyros i pita", ingredients: "", price: 65, menu_id: m3.id)
-d9 = Dish.create(name: "Gyrosrulle", ingredients: "", price: 65, menu_id: m3.id)
+d7 = Dish.create(name: "Gyrostallrik", ingredients: "Gyroskött, pommes, sallad, lök, tomat, sås", price: 65, menu_id: m3.id)
+d8 = Dish.create(name: "Gyros i pita", ingredients: "Pitabröd, gyroskött, sallad, lök, tomat, kebabsås", price: 65, menu_id: m3.id)
+d9 = Dish.create(name: "Gyrosrulle", ingredients: "Tunnbröd, isbergssallad, lök, tomat, gyroskött, kebabsås", price: 65, menu_id: m3.id)
 
-d10 = Dish.create(name: "Kebabtallrik", ingredients: "", price: 65, menu_id: m4.id)
-d11 = Dish.create(name: "Kebab i pita", ingredients: "", price: 65, menu_id: m4.id)
-d12 = Dish.create(name: "Kebabrulle", ingredients: "", price: 65, menu_id: m4.id)
+d10 = Dish.create(name: "Kebabtallrik", ingredients: "Kebabkött, pommes, sallad, lök, tomat, sås", price: 65, menu_id: m4.id)
+d11 = Dish.create(name: "Kebab i pita", ingredients: "Pitabröd, kebabkött, sallad, lök, tomat, kebabsås", price: 65, menu_id: m4.id)
+d12 = Dish.create(name: "Kebabrulle", ingredients: "Tunnbröd, isbergssallad, lök, tomat, kebabkött, kebabsås", price: 65, menu_id: m4.id)
 
-d13 = Dish.create(name: "Oxfilépasta", ingredients: "", price: 65, menu_id: m5.id)
-d14 = Dish.create(name: "Fläskfilé i pepparsås", ingredients: "", price: 65, menu_id: m5.id)
-d15 = Dish.create(name: "Spaghetti Bolognese", ingredients: "", price: 65, menu_id: m5.id)
+d13 = Dish.create(name: "Oxfilépasta", ingredients: "Oxfilé, färska champinjoner, jalapeño, gräddsås, gorgonzola", price: 65, menu_id: m5.id)
+d14 = Dish.create(name: "Fläskfilé i pepparsås", ingredients: "Fläskfilé, färska champinjoner, jalapeño, gräddsås, gorgonzola", price: 65, menu_id: m5.id)
+d15 = Dish.create(name: "Spaghetti Bolognese", ingredients: "Köttfärssås", price: 65, menu_id: m5.id)
 
 # Tag
 t1 = Tag.create(name: "Kebab")
